@@ -1,0 +1,8 @@
+{
+  "baseline_name": "last_day_same_slot",
+  "prediction_count": 5856,
+  "prediction_min": 1.29,
+  "prediction_max": 8.93,
+  "prediction_mean": 5.117158,
+  "submission_path": "experiments/0408_102530_3a98d6_LastDaySubmission/results/last_day_same_slot_submission.csv"
+}

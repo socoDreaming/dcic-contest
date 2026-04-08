@@ -6,16 +6,22 @@ from dcic_contest.baseline.features import (
     build_time_features,
     feature_column_names,
 )
-from dcic_contest.baseline.gbdt import (
-    LightGBMConfig,
-    LightGBMDirectForecaster,
-    LightGBMRecursiveForecaster,
-)
 from dcic_contest.baseline.registry import (
     DEFAULT_BASELINE_NAMES,
     available_baselines,
     build_forecasters,
 )
+
+try:
+    from dcic_contest.baseline.gbdt import (
+        LightGBMConfig,
+        LightGBMDirectForecaster,
+        LightGBMRecursiveForecaster,
+    )
+except ModuleNotFoundError:  # pragma: no cover
+    LightGBMConfig = None
+    LightGBMDirectForecaster = None
+    LightGBMRecursiveForecaster = None
 
 __all__ = [
     "BaselineForecaster",

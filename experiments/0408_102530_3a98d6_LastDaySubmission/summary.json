@@ -1,0 +1,35 @@
+{
+  "config": {
+    "input_csv": "data/A榜-充电站充电负荷训练数据.csv",
+    "submit_example_csv": "data/submit_example.csv",
+    "baseline_name": "last_day_same_slot",
+    "encoding": "gb18030",
+    "horizon_steps": 96,
+    "n_folds": 3,
+    "experiment_dir": "experiments/0408_102530_3a98d6_LastDaySubmission"
+  },
+  "backtest": {
+    "source_file": "data/A榜-充电站充电负荷训练数据.csv",
+    "n_folds": 3,
+    "horizon_steps": 96,
+    "horizon_hours": 24.0,
+    "baseline_names": [
+      "last_day_same_slot"
+    ],
+    "models": {
+      "last_day_same_slot": {
+        "rmse_mean": 0.207497,
+        "rmse_std": 0.006187
+      }
+    },
+    "best_model_by_mean_rmse": "last_day_same_slot"
+  },
+  "prediction": {
+    "baseline_name": "last_day_same_slot",
+    "prediction_count": 5856,
+    "prediction_min": 1.29,
+    "prediction_max": 8.93,
+    "prediction_mean": 5.117158,
+    "submission_path": "experiments/0408_102530_3a98d6_LastDaySubmission/results/last_day_same_slot_submission.csv"
+  }
+}

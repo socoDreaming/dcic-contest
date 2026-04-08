@@ -1,0 +1,2 @@
+model,fold_count,rmse_mean,rmse_std,rmse_min,rmse_max
+last_day_same_slot,3,0.207497,0.006187,0.203045,0.216246
