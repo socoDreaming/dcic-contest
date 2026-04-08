@@ -1,13 +1,10 @@
 from __future__ import annotations
 
 from dcic_contest.baseline.base import BaselineForecaster
-from dcic_contest.baseline.gbdt import (
-    LightGBMDirectForecaster,
-    LightGBMRecursiveForecaster,
-)
 from dcic_contest.baseline.naive import (
     Last7DaySameSlotForecaster,
     LastDaySameSlotForecaster,
+    RecentDaysWeightedSameSlotForecaster,
 )
 from dcic_contest.baseline.seasonal import WeekdaySlotMeanForecaster
 
@@ -21,10 +18,21 @@ DEFAULT_BASELINE_NAMES = [
 _FORECASTERS: dict[str, type[BaselineForecaster]] = {
     LastDaySameSlotForecaster.name: LastDaySameSlotForecaster,
     Last7DaySameSlotForecaster.name: Last7DaySameSlotForecaster,
+    RecentDaysWeightedSameSlotForecaster.name: RecentDaysWeightedSameSlotForecaster,
     WeekdaySlotMeanForecaster.name: WeekdaySlotMeanForecaster,
-    LightGBMDirectForecaster.name: LightGBMDirectForecaster,
-    LightGBMRecursiveForecaster.name: LightGBMRecursiveForecaster,
 }
+
+try:
+    from dcic_contest.baseline.gbdt import (
+        LightGBMDirectForecaster,
+        LightGBMRecursiveForecaster,
+    )
+
+    _FORECASTERS[LightGBMDirectForecaster.name] = LightGBMDirectForecaster
+    _FORECASTERS[LightGBMRecursiveForecaster.name] = LightGBMRecursiveForecaster
+except ModuleNotFoundError:
+    # 允许在无 sklearn/lightgbm 环境下使用纯规则基线。
+    pass
 
 
 def available_baselines() -> list[str]:
